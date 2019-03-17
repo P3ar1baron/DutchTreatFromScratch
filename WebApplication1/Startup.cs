@@ -22,6 +22,7 @@ namespace WebApplication1
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseNodeModules(env);
         }
     }
 }
