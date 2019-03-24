@@ -25,7 +25,10 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
             app.UseStaticFiles();
             app.UseNodeModules(env);
 
