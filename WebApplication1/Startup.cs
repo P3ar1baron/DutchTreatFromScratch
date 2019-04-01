@@ -27,6 +27,8 @@ namespace WebApplication1
 
             services.AddTransient<DutchSeeder>();
 
+            services.AddScoped<IDutchRepository, DutchRepository>();
+
             services.AddTransient<IMailService, NullMailService>();
             //Support for real mail service
 
