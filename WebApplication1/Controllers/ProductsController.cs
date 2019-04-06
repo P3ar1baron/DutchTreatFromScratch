@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DutchTreat.Controllers
 {
     [Route("api/[Controller]")]
-    public class ProductsController : Controller
+    [ApiController]
+    [Produces("application/json")]
+    public class ProductsController : ControllerBase
     {
         private readonly IDutchRepository _repository;
         private readonly ILogger<ProductsController> _logger;
@@ -22,16 +22,18 @@ namespace DutchTreat.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public ActionResult<IEnumerable<Product>> Get()
         {
             try
             {
-                return _repository.GetAllProducts();
+                return Ok(_repository.GetAllProducts());
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Failed to get products: {ex}");
-                return null;
+                return BadRequest("Failed to get products");
             }
         }
     }
